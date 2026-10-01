@@ -16,7 +16,6 @@ const buttonVariants = cva(
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         link: "text-primary underline-offset-4 hover:underline",
       },
-      // كل الأحجام ≥ 44px عشان اللمس على tablet (إلا icon-sm للاستخدام داخل stepper)
       size: {
         default: "min-h-touch px-4 py-2",
         sm: "min-h-9 px-3",
@@ -32,7 +31,6 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  /** يعرض spinner ويعطّل الزر (aria-busy) */
   loading?: boolean;
 }
 
@@ -42,7 +40,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         ref={ref}
-        // type="button" افتراضيًا عشان مفيش submit بالغلط داخل الفورم
         type={asChild ? undefined : (type ?? "button")}
         className={cn(buttonVariants({ variant, size }), className)}
         disabled={disabled || loading}
